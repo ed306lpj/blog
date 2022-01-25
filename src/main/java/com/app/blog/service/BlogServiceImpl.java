@@ -131,6 +131,10 @@ public class BlogServiceImpl implements BlogService {
             //设置博客分类名称
             blog.setBlogCategoryName(category.getCategoryName());
         }
+
+        blog.setBlogCoverImage("/img/"+blog.getBlogCategoryName().toLowerCase()+".png");
+
+
         //处理标签数据
         String[] tags = blog.getBlogTags().split(",");
         if (tags.length > 6) return 6;
