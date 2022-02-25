@@ -5,7 +5,7 @@
 <mapper namespace="com.app.blog.mapper.CategoryMapper">
     <!--查询全部信息-->
     <select id="selCategory" resultType="com.app.blog.entity.Category">
-        select * from Category
+        select * from category
         <where>
             <if test="categoryId!=null and categoryId!=0">
                 categoryId=#{id}
@@ -15,7 +15,7 @@
 
     <!--根据id查询-->
     <select id="CategoryById" resultType="com.app.blog.entity.Category">
-        SELECT * FROM Category WHERE categoryId=#{id}
+        SELECT * FROM category WHERE categoryId=#{id}
     </select>
 
     <select id="findCategoryList" parameterType="java.util.Map" resultType="com.app.blog.entity.Category">
@@ -53,12 +53,12 @@
 
     <!--添加-->
     <insert id="insertCategory">
-        insert into Category(categoryName,createTime)
+        insert into category(categoryName,createTime)
         values (#{categoryName},#{createTime})
     </insert>
     <!--查询是否存在-->
     <select id="selectByCategoryName" parameterType="String" resultType="com.app.blog.entity.Category">
-        select *,count(1) count from Category where categoryName=#{name}
+        select *,count(1) count from category where categoryName=#{name}
     </select>
 
     <!--根据分类名查询-->

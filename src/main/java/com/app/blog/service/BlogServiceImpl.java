@@ -62,10 +62,12 @@ public class BlogServiceImpl implements BlogService {
                 tagListForInsert.add(tempTag);
             }
         }
+        blog.setBlogCoverImage("/img/"+blog.getBlogCategoryName().toLowerCase()+".png");
         //添加标签
         if (!CollectionUtils.isEmpty(tagListForInsert)) {
             tagMapper.batchInsertBlogTag(tagListForInsert);
         }
+
         blog.setCreateTime(new Date());// 赋给创建时间
         blog.setUpdateTime(new Date());// 赋给修改时间
         return mapper.saveBlog(blog);
