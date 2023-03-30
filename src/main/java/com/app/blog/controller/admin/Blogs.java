@@ -1,6 +1,7 @@
 package com.app.blog.controller.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -9,8 +10,11 @@ import com.app.blog.entity.*;
 import com.app.blog.service.*;
 import com.app.blog.util.*;
 
+import cn.hutool.json.JSONUtil;
+
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Lete乐特
@@ -26,6 +30,11 @@ public class Blogs {
     private BlogServiceImpl blogService;
     @Autowired
     UserServiceImpl userService;
+    
+    @Autowired
+    private RedisTemplate redisTemplate;
+    
+    
 
     /*查询全部文章 and 分页*/
     @GetMapping("/blogs/list")
@@ -65,13 +74,19 @@ public class Blogs {
     @PostMapping("/blogs/modify")
     @ResponseBody
     public String Modify(Blog blog){
+    	
+    	
+    	
         blog.setBlogContent(blog.getBlogContent().replaceAll("[^\\u0000-\\uFFFF]", ""));
         int result = blogService.ModifyArticle(blog);
         /*标签数量超过6个标签是提示*/
         if(result==6)return "6";
         /*文章描述不能为空*/
         if(result==10)return "description";
-        if(result>0)return "success";
+        if(result>0) {
+        	redisTemplate.delete(blog.getBlogSubUrl());
+        	return "success";
+        }
         return "error";
     }
     /*添加文章*/

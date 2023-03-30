@@ -30,7 +30,16 @@ spring:
     host: smtp.exmail.qq.com # 邮件服务器
     properties:
       "mail.smtp.ssl.enable": true
-
+  redis:
+    host: 82.156.4.50
+    port: 6379
+    password: edong306Lpj
+    database: 0
+    lettuce:
+      pool:
+        max-idle: 16
+        max-active: 32
+        min-idle: 8
 # mybatis
 mybatis:
   mapper-locations: classpath:mapping/*.xml

@@ -2,6 +2,7 @@ package com.app.blog.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,9 @@ import com.app.blog.entity.*;
 import com.app.blog.service.*;
 import com.app.blog.util.*;
 
+import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.json.JSONUtil;
+
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +23,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Lete乐特
@@ -43,6 +48,11 @@ public class Article {
     // 获取配置文件内的发送邮箱
     @Value("${spring.mail.username}")
     private String from;
+    
+    
+    @Autowired
+    private RedisTemplate redisTemplate;
+    
 
 
     private String date(){
@@ -78,9 +88,21 @@ public class Article {
     @GetMapping("/article/{url}")
     public String toArticle(Model mod, @PathVariable("url") String url) throws IOException, ParseException {
 
-        Blog blog = blogService.BlogByName(url);
+    	Blog blog = new Blog();
+    	String blogStr =  (String)redisTemplate.opsForValue().get(url);
+    	if (ObjectUtil.isNull(blogStr)) {
+    		 blog = blogService.BlogByName(url);
+    		 redisTemplate.opsForValue().set(url, JSONUtil.toJsonStr(blog),24,TimeUnit.HOURS);
+		}else {
+			blog = JSONUtil.toBean(blogStr, Blog.class);
+		}
+    	
+    	
         mod.addAttribute("date",this.date());
         mod.addAttribute("blog",blog);
+        
+        
+        
         mod.addAttribute("blogCount",blogService.getTotalBlogs());
         mod.addAttribute("tagCount",tagService.getTotalTags());
         mod.addAttribute("categoriesCount",categoryService.getTotalCategories());
