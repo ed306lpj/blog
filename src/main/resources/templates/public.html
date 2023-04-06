@@ -20,7 +20,7 @@
     <meta property="og:description" th:content="${desc}" />
     <meta property="og:image" th:content="${avatar}" />
     <link rel="stylesheet" href="/css/CodeBlock.css" />
-    <script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script>
+    <script src="https://gcore.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script>
 <script>var activateDarkMode = function () {
     document.documentElement.setAttribute('data-theme', 'dark')
     if (document.querySelector('meta[name="theme-color"]') !== null) {
@@ -76,9 +76,9 @@ if (autoChangeMode === '1') {
     else if (t === 'light') activateLightMode()
 }</script>
 <link rel="stylesheet" href="/css/index.css" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" />
+<link rel="stylesheet" href="https://gcore.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" />
+<link rel="stylesheet" href="https://gcore.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css" />
+<link rel="stylesheet" href="https://gcore.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" />
 <script>var GLOBAL_CONFIG = {
     root: '/',
     algolia: undefined,
@@ -102,8 +102,8 @@ if (autoChangeMode === '1') {
     fancybox: true,
     Snackbar: {"bookmark":{"message_prev":"按","message_next":"键将本页加入书签"},"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#e58a8a","bgDark":"#e58a8a","position":"top-right"},
     justifiedGallery: {
-        js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
-        css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+        js: 'https://gcore.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+        css: 'https://gcore.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
     },
     baiduPush: true,
     highlightCopy: true,
@@ -459,14 +459,14 @@ if (autoChangeMode === '1') {
 <th:block th:fragment="pjax">
     <script src="https://cdn.jsdelivr.net/gh/lete114/lete114.github.io@latest/js/utils.min.js"></script>
     <script src="/js/main.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js" async=""></script>
-    <script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script>
+    <script src="https://gcore.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script>
+    <script src="https://gcore.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js" async=""></script>
+    <script src="https://gcore.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script>
     <script>
         function panguFn() {
             if (typeof pangu === 'object') pangu.spacingElementById('content-inner')
             else {
-                $.getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js', () => {
+                $.getScript('https://gcore.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js', () => {
                     pangu.spacingElementById('content-inner')
                 })
             }
@@ -488,7 +488,7 @@ if (autoChangeMode === '1') {
         <script async="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
         <script async="" src="/js/ProgressBar.js"></script>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
+    <script src="https://gcore.jsdelivr.net/npm/pjax/pjax.min.js"></script>
     <script>var pjax = new Pjax({
         elements: 'a:not([target="_blank"])',
         selectors: [
